@@ -18,13 +18,13 @@ public record ErrorResponse(
         List<ValidError> validError
 ) {
     @Builder
-    record ValidError(
+    private record ValidError(
             String field,
             String value,
             String message
     ) {
 
-        static List<ValidError> of(BindingResult bindingResult) {
+        private static List<ValidError> of(BindingResult bindingResult) {
             List<FieldError> errors = bindingResult.getFieldErrors();
 
             return errors.stream().map((error) -> ValidError.builder()
@@ -36,14 +36,14 @@ public record ErrorResponse(
         }
     }
 
-    static ErrorResponse of(HttpStatus httpStatus, String message) {
+    public static ErrorResponse of(HttpStatus httpStatus, String message) {
         return ErrorResponse.builder()
                 .httpStatus(httpStatus)
                 .message(message)
                 .build();
     }
 
-    static ErrorResponse of(HttpStatus httpStatus, String message, BindingResult bindingResult) {
+    public static ErrorResponse of(HttpStatus httpStatus, String message, BindingResult bindingResult) {
         return ErrorResponse.builder()
                 .httpStatus(httpStatus)
                 .message(message)
