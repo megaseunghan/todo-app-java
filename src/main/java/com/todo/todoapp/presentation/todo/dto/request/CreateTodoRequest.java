@@ -1,5 +1,6 @@
 package com.todo.todoapp.presentation.todo.dto.request;
 
+import com.todo.todoapp.domain.todo.model.Todo;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Builder;
@@ -26,5 +27,15 @@ public record CreateTodoRequest(
         if (Objects.isNull(createdDate)) {
             createdDate = LocalDateTime.now();
         }
+    }
+
+    public Todo toEntity() {
+        return Todo.builder()
+                .title(title)
+                .description(description)
+                .manager(manager)
+                .password(password)
+                .createdDate(createdDate)
+                .build();
     }
 }
