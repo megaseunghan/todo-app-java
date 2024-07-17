@@ -37,6 +37,10 @@ dependencies {
     // LOMBOK
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
+    // CONFIGURATION
+    implementation('org.springframework.boot:spring-boot-configuration-processor')
+    // SWAGGER
+    implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.2.0")
     // TEST
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
