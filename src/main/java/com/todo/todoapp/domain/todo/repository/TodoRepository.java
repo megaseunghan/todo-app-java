@@ -11,4 +11,6 @@ public interface TodoRepository {
     Optional<Todo> findById(long id);
 
     List<Todo> findAll();
+
+    void delete(Todo todo);
 }
