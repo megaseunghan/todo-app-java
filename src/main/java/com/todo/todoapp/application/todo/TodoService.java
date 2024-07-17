@@ -3,6 +3,7 @@ package com.todo.todoapp.application.todo;
 import com.todo.todoapp.domain.todo.model.Todo;
 import com.todo.todoapp.domain.todo.repository.TodoRepository;
 import com.todo.todoapp.presentation.todo.dto.request.CreateTodoRequest;
+import com.todo.todoapp.presentation.todo.dto.request.DeleteTodoRequest;
 import com.todo.todoapp.presentation.todo.dto.request.UpdateTodoRequest;
 import com.todo.todoapp.presentation.todo.dto.response.TodoResponse;
 import jakarta.transaction.Transactional;
@@ -37,19 +38,16 @@ public class TodoService {
     @Transactional
     public TodoResponse update(long id, UpdateTodoRequest request) {
         Todo todo = getTodoById(id);
-
-        if (!request.password().equals(todo.getPassword())) {
-            throw new IllegalArgumentException("비밀번호가 올바르지 않습니다.");
-        }
-
+        isCorrectPassword(todo.getPassword(), request.password());
         todo.update(request);
 
         return TodoResponse.from(todo);
     }
 
     @Transactional
-    public void delete(long id) {
+    public void delete(long id, DeleteTodoRequest request) {
         Todo todo = getTodoById(id);
+        isCorrectPassword(todo.getPassword(), request.password());
         todoRepository.delete(todo);
     }
 
@@ -59,4 +57,9 @@ public class TodoService {
         return todo;
     }
 
+    private void isCorrectPassword(String origin, String comparison) {
+        if (!origin.equals(comparison)) {
+            throw new IllegalArgumentException("비밀번호가 올바르지 않습니다.");
+        }
+    }
 }
