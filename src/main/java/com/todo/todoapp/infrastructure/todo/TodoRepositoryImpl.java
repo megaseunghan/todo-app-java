@@ -1,7 +1,8 @@
-package com.todo.todoapp.infrastructure.todo.hibernate;
+package com.todo.todoapp.infrastructure.todo;
 
 import com.todo.todoapp.domain.todo.model.Todo;
 import com.todo.todoapp.domain.todo.repository.TodoRepository;
+import com.todo.todoapp.infrastructure.todo.hibernate.TodoJPARepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
