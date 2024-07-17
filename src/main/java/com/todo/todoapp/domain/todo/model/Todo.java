@@ -1,5 +1,6 @@
 package com.todo.todoapp.domain.todo.model;
 
+import com.todo.todoapp.presentation.todo.dto.request.UpdateTodoRequest;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -27,4 +28,10 @@ public class Todo {
     private String manager;
     private String password;
     private LocalDateTime createdDate;
+
+    public void update(UpdateTodoRequest request) {
+        this.title = request.title();
+        this.description = request.description();
+        this.manager = request.manager();
+    }
 }
