@@ -18,13 +18,6 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class Todo {
 
-    public Todo(String title, String description, String manager, LocalDateTime createdDate) {
-        this.title = title;
-        this.description = description;
-        this.manager = manager;
-        this.createdDate = createdDate;
-    }
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
