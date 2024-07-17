@@ -2,6 +2,7 @@ package com.todo.todoapp.presentation.todo;
 
 import com.todo.todoapp.application.todo.TodoService;
 import com.todo.todoapp.presentation.todo.dto.request.CreateTodoRequest;
+import com.todo.todoapp.presentation.todo.dto.request.DeleteTodoRequest;
 import com.todo.todoapp.presentation.todo.dto.request.UpdateTodoRequest;
 import com.todo.todoapp.presentation.todo.dto.response.TodoResponse;
 import lombok.RequiredArgsConstructor;
@@ -45,8 +46,8 @@ public class TodoController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable long id) {
-        todoService.delete(id);
+    public ResponseEntity<Void> delete(@PathVariable long id, @RequestBody DeleteTodoRequest request) {
+        todoService.delete(id, request);
         return ResponseEntity.noContent().build();
     }
 
