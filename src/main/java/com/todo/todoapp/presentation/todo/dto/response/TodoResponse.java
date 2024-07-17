@@ -6,15 +6,15 @@ import lombok.Builder;
 import java.time.LocalDateTime;
 
 @Builder
-public record CreatedTodoResponse(
+public record TodoResponse(
         long id,
         String title,
         String description,
         LocalDateTime createdDate,
         String manager
 ) {
-    public static CreatedTodoResponse from(Todo todo) {
-        return CreatedTodoResponse.builder()
+    public static TodoResponse from(Todo todo) {
+        return TodoResponse.builder()
                 .id(todo.getId())
                 .title(todo.getTitle())
                 .description(todo.getDescription())
