@@ -34,5 +34,6 @@ public class TodoController {
     @GetMapping
     public ResponseEntity<List<CreatedTodoResponse>> findAll() {
         List<CreatedTodoResponse> response = todoService.findAll();
+        return ResponseEntity.ok(response);
     }
 }
