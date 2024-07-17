@@ -1,9 +1,10 @@
 package com.todo.todoapp.global.exception.handler.response;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.todo.todoapp.global.exception.common.code.ErrorCode;
 import jakarta.annotation.Nullable;
 import lombok.Builder;
-import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 
@@ -12,8 +13,7 @@ import java.util.List;
 @Builder
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public record ErrorResponse(
-        HttpStatus httpStatus,
-        String message,
+        ErrorCode errorCode,
         @Nullable
         List<ValidError> validError
 ) {
@@ -36,18 +36,18 @@ public record ErrorResponse(
         }
     }
 
-    public static ErrorResponse of(HttpStatus httpStatus, String message) {
-        return ErrorResponse.builder()
-                .httpStatus(httpStatus)
-                .message(message)
-                .build();
+    public static ResponseEntity<ErrorResponse> of(ErrorCode errorCode) {
+        return ResponseEntity.status(errorCode.getHttpStatus())
+                .body(ErrorResponse.builder()
+                        .errorCode(errorCode)
+                        .build());
     }
 
-    public static ErrorResponse of(HttpStatus httpStatus, String message, BindingResult bindingResult) {
-        return ErrorResponse.builder()
-                .httpStatus(httpStatus)
-                .message(message)
-                .validError(ValidError.of(bindingResult))
-                .build();
+    public static ResponseEntity<ErrorResponse> of(ErrorCode errorCode, BindingResult bindingResult) {
+        return ResponseEntity.status(errorCode.getHttpStatus())
+                .body(ErrorResponse.builder()
+                        .errorCode(errorCode)
+                        .validError(ValidError.of(bindingResult))
+                        .build());
     }
 }
