@@ -38,7 +38,7 @@ public class TodoService {
     public TodoResponse update(long id, UpdateTodoRequest request) {
         Todo todo = getTodoById(id);
 
-        if (request.password() != todo.getPassword()) {
+        if (!request.password().equals(todo.getPassword())) {
             throw new IllegalArgumentException("비밀번호가 올바르지 않습니다.");
         }
 
