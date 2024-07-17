@@ -2,6 +2,9 @@ package com.todo.todoapp.application.todo;
 
 import com.todo.todoapp.domain.todo.model.Todo;
 import com.todo.todoapp.domain.todo.repository.TodoRepository;
+import com.todo.todoapp.global.exception.todo.IncorrectPasswordException;
+import com.todo.todoapp.global.exception.todo.NoSuchTodoException;
+import com.todo.todoapp.global.exception.todo.code.TodoErrorCode;
 import com.todo.todoapp.presentation.todo.dto.request.CreateTodoRequest;
 import com.todo.todoapp.presentation.todo.dto.request.DeleteTodoRequest;
 import com.todo.todoapp.presentation.todo.dto.request.UpdateTodoRequest;
@@ -52,14 +55,12 @@ public class TodoService {
     }
 
     private Todo getTodoById(long id) {
-        Todo todo = todoRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException(id + "로 조회되는 할 일은 없습니다"));
-        return todo;
+        return todoRepository.findById(id).orElseThrow(() -> new NoSuchTodoException(TodoErrorCode.FIND_FAILED));
     }
 
     private void isCorrectPassword(String origin, String comparison) {
         if (!origin.equals(comparison)) {
-            throw new IllegalArgumentException("비밀번호가 올바르지 않습니다.");
+            throw new IncorrectPasswordException(TodoErrorCode.INCORRECT_PASSWORD);
         }
     }
 }
