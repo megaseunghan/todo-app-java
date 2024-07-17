@@ -23,7 +23,8 @@ public class TodoService {
     }
 
     public CreatedTodoResponse find(long id) {
-        Todo todo = todoRepository.findById(id);
+        Todo todo = todoRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException(id + "로 조회되는 할 일은 없습니다"));
         return CreatedTodoResponse.from(todo);
     }
 
