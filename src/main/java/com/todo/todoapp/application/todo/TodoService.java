@@ -31,6 +31,6 @@ public class TodoService {
     public List<CreatedTodoResponse> findAll() {
         List<Todo> todos = todoRepository.findAll();
         todos.sort(Comparator.comparing(Todo::getCreatedDate).reversed());
-        return todos.stream().map((todo -> CreatedTodoResponse.from(todo))).toList();
+        return todos.stream().map((CreatedTodoResponse::from)).toList();
     }
 }
