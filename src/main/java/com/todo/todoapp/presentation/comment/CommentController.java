@@ -27,4 +27,12 @@ public class CommentController {
         return ResponseEntity.created(uri).body(response);
     }
 
+    @PatchMapping("/{id}")
+    public ResponseEntity<CommentResponse> update(
+            @PathVariable long id,
+            @Valid @RequestBody UpdateCommentRequest request) {
+        CommentResponse response = commentService.update(id, request);
+
+        return ResponseEntity.ok().body(response);
+    }
 }
