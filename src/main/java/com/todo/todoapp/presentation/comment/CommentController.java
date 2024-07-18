@@ -37,7 +37,7 @@ public class CommentController {
         return ResponseEntity.ok().body(response);
     }
 
-    @DeleteMapping("/{id]")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable long id) {
         commentService.delete(id);
         return ResponseEntity.noContent().build();
