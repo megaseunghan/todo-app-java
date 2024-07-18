@@ -14,6 +14,7 @@ public record CommentResponse(
 ) {
     public static CommentResponse from(Comment comment) {
         return CommentResponse.builder()
+                .id(comment.getId())
                 .comment(comment.getComment())
                 .writerId(comment.getWriterId())
                 .createdAt(comment.getCreatedAt())
