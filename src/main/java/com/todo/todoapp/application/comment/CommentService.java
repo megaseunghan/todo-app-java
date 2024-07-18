@@ -4,6 +4,8 @@ import com.todo.todoapp.domain.comment.model.Comment;
 import com.todo.todoapp.domain.comment.repository.CommentRepository;
 import com.todo.todoapp.domain.todo.model.Todo;
 import com.todo.todoapp.domain.todo.repository.TodoRepository;
+import com.todo.todoapp.global.exception.comment.NoSuchCommentException;
+import com.todo.todoapp.global.exception.comment.code.CommentErrorCode;
 import com.todo.todoapp.global.exception.todo.NoSuchTodoException;
 import com.todo.todoapp.global.exception.todo.code.TodoErrorCode;
 import com.todo.todoapp.presentation.comment.dto.request.CreateCommentRequest;

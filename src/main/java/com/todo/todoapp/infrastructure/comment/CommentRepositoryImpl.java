@@ -6,6 +6,8 @@ import com.todo.todoapp.infrastructure.comment.hibernate.CommentJpaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
 @RequiredArgsConstructor
 public class CommentRepositoryImpl implements CommentRepository {
@@ -14,5 +16,10 @@ public class CommentRepositoryImpl implements CommentRepository {
     @Override
     public Comment save(Comment comment) {
         return jpaRepository.save(comment);
+    }
+
+    @Override
+    public Optional<Comment> findById(long id) {
+        return jpaRepository.findById(id);
     }
 }
