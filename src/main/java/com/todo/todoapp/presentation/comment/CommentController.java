@@ -2,6 +2,7 @@ package com.todo.todoapp.presentation.comment;
 
 import com.todo.todoapp.application.comment.CommentService;
 import com.todo.todoapp.presentation.comment.dto.request.CreateCommentRequest;
+import com.todo.todoapp.presentation.comment.dto.request.UpdateCommentRequest;
 import com.todo.todoapp.presentation.comment.dto.response.CommentResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -27,4 +28,12 @@ public class CommentController {
         return ResponseEntity.created(uri).body(response);
     }
 
+    @PatchMapping("/{id}")
+    public ResponseEntity<CommentResponse> update(
+            @PathVariable long id,
+            @Valid @RequestBody UpdateCommentRequest request) {
+        CommentResponse response = commentService.update(id, request);
+
+        return ResponseEntity.ok().body(response);
+    }
 }

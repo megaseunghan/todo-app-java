@@ -2,6 +2,7 @@ package com.todo.todoapp.domain.comment.model;
 
 import com.todo.todoapp.domain.todo.model.Todo;
 import com.todo.todoapp.global.entity.BaseEntity;
+import com.todo.todoapp.presentation.comment.dto.request.UpdateCommentRequest;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -24,4 +25,8 @@ public class Comment extends BaseEntity {
     private String comment;
 
     private String writerId;
+
+    public void update(UpdateCommentRequest request) {
+        this.comment = request.comment();
+    }
 }
