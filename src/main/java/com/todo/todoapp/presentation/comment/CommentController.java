@@ -2,6 +2,7 @@ package com.todo.todoapp.presentation.comment;
 
 import com.todo.todoapp.application.comment.CommentService;
 import com.todo.todoapp.presentation.comment.dto.request.CreateCommentRequest;
+import com.todo.todoapp.presentation.comment.dto.request.UpdateCommentRequest;
 import com.todo.todoapp.presentation.comment.dto.response.CommentResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
