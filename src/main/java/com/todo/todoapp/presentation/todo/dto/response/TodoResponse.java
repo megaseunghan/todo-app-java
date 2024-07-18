@@ -10,7 +10,7 @@ public record TodoResponse(
         long id,
         String title,
         String description,
-        LocalDateTime createdDate,
+        LocalDateTime createdAt,
         String manager
 ) {
     public static TodoResponse from(Todo todo) {
@@ -19,7 +19,7 @@ public record TodoResponse(
                 .title(todo.getTitle())
                 .description(todo.getDescription())
                 .manager(todo.getManager())
-                .createdDate(todo.getCreatedDate())
+                .createdAt(todo.getCreatedAt())
                 .build();
     }
 }

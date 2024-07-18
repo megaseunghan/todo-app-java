@@ -4,10 +4,6 @@ import com.todo.todoapp.domain.todo.model.Todo;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
-import lombok.Builder;
-
-import java.time.LocalDateTime;
-import java.util.Objects;
 
 public record CreateTodoRequest(
 
@@ -22,25 +18,14 @@ public record CreateTodoRequest(
         String manager,
         @NotBlank(message = "비밀번호는 필수 입력입니다.(4글자)")
         @Size(min = 4, max = 4)
-        String password,
-
-        LocalDateTime createdDate
+        String password
 ) {
-
-    @Builder
-    public CreateTodoRequest {
-        if (Objects.isNull(createdDate)) {
-            createdDate = LocalDateTime.now();
-        }
-    }
-
     public Todo toEntity() {
         return Todo.builder()
                 .title(title)
                 .description(description)
                 .manager(manager)
                 .password(password)
-                .createdDate(createdDate)
                 .build();
     }
 }
