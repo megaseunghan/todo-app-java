@@ -35,6 +35,6 @@ public class RestApiExceptionHandler {
     }
 
     private void logInfo(Exception exception) {
-        log.info(exception.getStackTrace().toString());
+        log.info(exception.getMessage());
     }
 }

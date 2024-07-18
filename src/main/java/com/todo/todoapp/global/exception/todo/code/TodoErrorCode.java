@@ -12,7 +12,7 @@ public enum TodoErrorCode implements ErrorCode {
     // 수정 / 삭제 시, 비밀번호가 일치하지 않을 때
     INCORRECT_PASSWORD(HttpStatus.UNAUTHORIZED, "비밀번호가 일치하지 않습니다."),
     // 일정이 존재하지 않거나 이미 삭제 되었을 때
-    FIND_FAILED(HttpStatus.NO_CONTENT, "해당 일정은 존재하지 않거나 이미 삭제되었습니다."),
+    FIND_FAILED(HttpStatus.BAD_REQUEST, "해당 일정은 존재하지 않거나 이미 삭제되었습니다."),
     ;
     private HttpStatus httpStatus;
     private String message;
