@@ -23,5 +23,5 @@ public class Comment extends BaseEntity {
 
     private String comment;
 
-    private String writer;
+    private String writerId;
 }
