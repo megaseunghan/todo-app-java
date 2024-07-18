@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.todo.todoapp.global.exception.common.code.ErrorCode;
 import jakarta.annotation.Nullable;
 import lombok.Builder;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -13,7 +14,8 @@ import java.util.List;
 @Builder
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public record ErrorResponse(
-        ErrorCode errorCode,
+        HttpStatus httpStatus,
+        String message,
         @Nullable
         List<ValidError> validError
 ) {
@@ -39,14 +41,16 @@ public record ErrorResponse(
     public static ResponseEntity<ErrorResponse> of(ErrorCode errorCode) {
         return ResponseEntity.status(errorCode.getHttpStatus())
                 .body(ErrorResponse.builder()
-                        .errorCode(errorCode)
+                        .httpStatus(errorCode.getHttpStatus())
+                        .message(errorCode.getMessage())
                         .build());
     }
 
     public static ResponseEntity<ErrorResponse> of(ErrorCode errorCode, BindingResult bindingResult) {
         return ResponseEntity.status(errorCode.getHttpStatus())
                 .body(ErrorResponse.builder()
-                        .errorCode(errorCode)
+                        .httpStatus(errorCode.getHttpStatus())
+                        .message(errorCode.getMessage())
                         .validError(ValidError.of(bindingResult))
                         .build());
     }
