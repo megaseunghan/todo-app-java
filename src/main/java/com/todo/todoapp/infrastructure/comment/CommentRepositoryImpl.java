@@ -22,4 +22,9 @@ public class CommentRepositoryImpl implements CommentRepository {
     public Optional<Comment> findById(long id) {
         return jpaRepository.findById(id);
     }
+
+    @Override
+    public void delete(Comment comment) {
+        jpaRepository.delete(comment);
+    }
 }
