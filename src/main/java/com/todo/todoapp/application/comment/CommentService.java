@@ -1,6 +1,7 @@
 package com.todo.todoapp.application.comment;
 
 import com.todo.todoapp.domain.comment.model.Comment;
+import com.todo.todoapp.domain.comment.repository.CommentRepository;
 import com.todo.todoapp.domain.todo.model.Todo;
 import com.todo.todoapp.domain.todo.repository.TodoRepository;
 import com.todo.todoapp.global.exception.todo.NoSuchTodoException;
