@@ -1,5 +1,6 @@
 package com.todo.todoapp.application.user;
 
+import com.todo.todoapp.domain.user.model.User;
 import com.todo.todoapp.domain.user.repository.UserRepository;
 import com.todo.todoapp.presentation.user.dto.request.SignUpRequest;
 import jakarta.transaction.Transactional;
