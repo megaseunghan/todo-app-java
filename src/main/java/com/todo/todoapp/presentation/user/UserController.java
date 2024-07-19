@@ -1,5 +1,6 @@
 package com.todo.todoapp.presentation.user;
 
+import com.todo.todoapp.application.user.UserService;
 import com.todo.todoapp.presentation.user.dto.request.SignUpRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
