@@ -22,7 +22,7 @@ public class UserService {
     }
 
     private void checkDuplicateNickname(String nickname) {
-        if (userRepository.existByNickname(nickname)) {
+        if (userRepository.existsByNickname(nickname)) {
             throw new DuplicateNicknameException(UserErrorCode.DUPLICATE_NICKNAME);
         }
     }
