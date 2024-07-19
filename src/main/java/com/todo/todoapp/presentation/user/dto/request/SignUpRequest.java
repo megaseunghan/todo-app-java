@@ -1,5 +1,6 @@
 package com.todo.todoapp.presentation.user.dto.request;
 
+import com.todo.todoapp.domain.user.model.User;
 import com.todo.todoapp.domain.user.vo.Role;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
@@ -14,4 +15,12 @@ public record SignUpRequest(
         String password,
         Role role
 ) {
+    public User toEntity() {
+        return User.builder()
+                .nickname(nickname)
+                .userName(userName)
+                .password(password)
+                .userRole(role)
+                .build();
+    }
 }
