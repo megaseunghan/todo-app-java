@@ -18,7 +18,7 @@ public class UserService {
         checkDuplicateNickname(request.nickname());
         User user = userRepository.save(request.toEntity());
 
-        return user.id();
+        return user.getId();
     }
 
     private void checkDuplicateNickname(String nickname) {
