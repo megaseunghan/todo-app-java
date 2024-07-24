@@ -18,7 +18,7 @@ public class UserController {
 
     private final UserService userService;
 
-    @PostMapping
+    @PostMapping("/register")
     public ResponseEntity<String> signup(@RequestBody SignUpRequest request) {
         long id = userService.signup(request);
         URI uri = URI.create(String.format("/users/%d", id));
