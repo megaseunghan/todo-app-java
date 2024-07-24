@@ -7,7 +7,10 @@ import org.springframework.http.HttpStatus;
 @AllArgsConstructor
 public enum UserErrorCode implements ErrorCode {
 
-    DUPLICATE_NICKNAME(HttpStatus.BAD_REQUEST, "이미 사용중인 닉네임입니다.");
+    DUPLICATE_NICKNAME(HttpStatus.BAD_REQUEST, "이미 사용중인 닉네임입니다."),
+    FIND_FAILED(HttpStatus.BAD_REQUEST, "해당 유저는 존재하지 않습니다."),
+    
+    ;
 
     private HttpStatus httpStatus;
     private String message;
