@@ -6,7 +6,7 @@ import lombok.Builder;
 import java.util.Set;
 
 @Builder
-public record VerifyUserResponse(
+public record AuthenticatedUserResponse(
         String userName,
         Set<Role> roles
 ) {

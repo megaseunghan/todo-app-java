@@ -3,7 +3,7 @@ package com.todo.todoapp.global.auth;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.todo.todoapp.application.user.UserService;
 import com.todo.todoapp.presentation.user.dto.request.LoginRequest;
-import com.todo.todoapp.presentation.user.dto.response.VerifyUserResponse;
+import com.todo.todoapp.presentation.user.dto.response.AuthenticatedUserResponse;
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -29,8 +29,8 @@ public class VerifyUserFilter implements Filter {
         if (httpServletRequest.getMethod().equals("POST")) {
             try {
                 LoginRequest loginRequest = objectMapper.readValue(httpServletRequest.getReader(), LoginRequest.class);
-                VerifyUserResponse verifyUserResponse = userService.verifyUser(loginRequest);
-                request.setAttribute(AUTHENTICATE_USER, verifyUserResponse);
+                AuthenticatedUserResponse authenticatedUserResponse = userService.verifyUser(loginRequest);
+                request.setAttribute(AUTHENTICATE_USER, authenticatedUserResponse);
                 chain.doFilter(request, response);
             } catch (Exception e) {
                 log.error("유저 인증에 실패했습니다");

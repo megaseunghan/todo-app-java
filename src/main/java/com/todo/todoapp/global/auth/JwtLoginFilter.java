@@ -3,7 +3,7 @@ package com.todo.todoapp.global.auth;
 import com.todo.todoapp.application.user.UserService;
 import com.todo.todoapp.infrastructure.jwt.JwtUtil;
 import com.todo.todoapp.infrastructure.jwt.vo.response.Jwt;
-import com.todo.todoapp.presentation.user.dto.response.VerifyUserResponse;
+import com.todo.todoapp.presentation.user.dto.response.AuthenticatedUserResponse;
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -28,12 +28,12 @@ public class JwtLoginFilter implements Filter {
         HttpServletResponse httpServletResponse = (HttpServletResponse) response;
         Object attribute = request.getAttribute(AUTHENTICATE_USER);
 
-        if (attribute instanceof VerifyUserResponse) {
+        if (attribute instanceof AuthenticatedUserResponse) {
             Map<String, Object> claims = new HashMap<>();
-            claims.put("userName", ((VerifyUserResponse) attribute).userName());
-            claims.put("role", ((VerifyUserResponse) attribute).roles());
+            claims.put("userName", ((AuthenticatedUserResponse) attribute).userName());
+            claims.put("role", ((AuthenticatedUserResponse) attribute).roles());
             Jwt jwt = jwtUtil.createJwt(claims);
-            userService.updateAccessToken(((VerifyUserResponse) attribute).userName(), jwt.accessToken());
+            userService.updateAccessToken(((AuthenticatedUserResponse) attribute).userName(), jwt.accessToken());
             httpServletResponse.setHeader("Authorization", "Bearer " + jwt.accessToken());
             return;
         }
