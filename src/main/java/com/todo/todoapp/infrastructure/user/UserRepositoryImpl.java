@@ -6,6 +6,8 @@ import com.todo.todoapp.infrastructure.user.hibernate.UserJpaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
 @RequiredArgsConstructor
 public class UserRepositoryImpl implements UserRepository {
@@ -20,5 +22,10 @@ public class UserRepositoryImpl implements UserRepository {
     @Override
     public boolean existsByNickname(String nickname) {
         return jpaRepository.existsByNickname(nickname);
+    }
+
+    @Override
+    public Optional<User> findByUserName(String userName) {
+        return jpaRepository.findByUserName(userName);
     }
 }

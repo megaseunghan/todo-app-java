@@ -18,7 +18,12 @@ public class User {
     private String nickname;
     private String userName;
     private String password;
+    private String accessToken;
 
     @Enumerated(EnumType.STRING)
     private Role userRole;
+
+    public void updateAccessToken(String accessToken) {
+        this.accessToken = accessToken;
+    }
 }
