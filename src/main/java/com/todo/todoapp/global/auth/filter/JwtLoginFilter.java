@@ -1,4 +1,4 @@
-package com.todo.todoapp.global.auth;
+package com.todo.todoapp.global.auth.filter;
 
 import com.todo.todoapp.application.user.UserService;
 import com.todo.todoapp.infrastructure.jwt.JwtUtil;
@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.todo.todoapp.global.auth.VerifyUserFilter.AUTHENTICATE_USER;
+import static com.todo.todoapp.global.auth.filter.VerifyUserFilter.AUTHENTICATE_USER;
 
 @Component
 @RequiredArgsConstructor

@@ -2,9 +2,9 @@ package com.todo.todoapp.global.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.todo.todoapp.application.user.UserService;
-import com.todo.todoapp.global.auth.JwtAuthorizationFilter;
-import com.todo.todoapp.global.auth.JwtLoginFilter;
-import com.todo.todoapp.global.auth.VerifyUserFilter;
+import com.todo.todoapp.global.auth.filter.JwtAuthorizationFilter;
+import com.todo.todoapp.global.auth.filter.JwtLoginFilter;
+import com.todo.todoapp.global.auth.filter.VerifyUserFilter;
 import com.todo.todoapp.infrastructure.jwt.JwtUtil;
 import jakarta.servlet.Filter;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;

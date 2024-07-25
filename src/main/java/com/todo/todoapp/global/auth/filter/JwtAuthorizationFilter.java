@@ -1,4 +1,4 @@
-package com.todo.todoapp.global.auth;
+package com.todo.todoapp.global.auth.filter;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.todo.todoapp.domain.user.vo.Role;
@@ -39,14 +39,14 @@ public class JwtAuthorizationFilter implements Filter {
             return;
         }
 
-        if (!containsToken(httpServletRequest)) {
+        if (!jwtUtil.containsToken(httpServletRequest)) {
             httpServletResponse.sendError(AUTHORIZE_FAILED.getHttpStatus().value(), AUTHORIZE_FAILED.getMessage());
             return;
         }
 
         try {
             String accessToken = httpServletRequest.getHeader("Authorization").substring(7);
-            AuthenticatedUserResponse verifyUser = getAuthenticateUser(accessToken);
+            AuthenticatedUserResponse verifyUser = jwtUtil.getAuthenticateUser(accessToken);
             chain.doFilter(request, response);
         } catch (JsonParseException e) {
             log.error("JSON 파싱 실패");
@@ -60,23 +60,9 @@ public class JwtAuthorizationFilter implements Filter {
         }
     }
 
-    private AuthenticatedUserResponse getAuthenticateUser(String accessToken) {
-        Claims claims = jwtUtil.getClaims(accessToken);
-        String userName = (String) claims.get("userName");
-        Role role = Role.valueOf((String) claims.get("role"));
-
-        return AuthenticatedUserResponse.builder()
-                .userName(userName)
-                .role(role)
-                .build();
-    }
 
     private boolean checkWhiteList(String requestURI) {
         return PatternMatchUtils.simpleMatch(whiteUrlList, requestURI);
     }
 
-    private boolean containsToken(HttpServletRequest httpServletRequest) {
-        String authorization = httpServletRequest.getHeader("Authorization");
-        return authorization != null && authorization.startsWith("Bearer ");
-    }
 }

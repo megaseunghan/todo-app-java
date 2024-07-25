@@ -1,4 +1,4 @@
-package com.todo.todoapp.global.auth;
+package com.todo.todoapp.global.auth.filter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.todo.todoapp.application.user.UserService;
