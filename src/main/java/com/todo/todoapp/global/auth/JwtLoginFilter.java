@@ -31,7 +31,7 @@ public class JwtLoginFilter implements Filter {
         if (attribute instanceof AuthenticatedUserResponse) {
             Map<String, Object> claims = new HashMap<>();
             claims.put("userName", ((AuthenticatedUserResponse) attribute).userName());
-            claims.put("role", ((AuthenticatedUserResponse) attribute).roles());
+            claims.put("role", ((AuthenticatedUserResponse) attribute).role());
             Jwt jwt = jwtUtil.createJwt(claims);
             userService.updateAccessToken(((AuthenticatedUserResponse) attribute).userName(), jwt.accessToken());
             httpServletResponse.setHeader("Authorization", "Bearer " + jwt.accessToken());

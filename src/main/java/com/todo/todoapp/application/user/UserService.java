@@ -12,8 +12,6 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.Set;
-
 @Service
 @RequiredArgsConstructor
 public class UserService {
@@ -34,7 +32,7 @@ public class UserService {
 
         return AuthenticatedUserResponse.builder()
                 .userName(user.getUserName())
-                .roles(Set.of(user.getUserRole()))
+                .role(user.getUserRole())
                 .build();
     }
 
