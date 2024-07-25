@@ -9,8 +9,8 @@ public enum UserErrorCode implements ErrorCode {
 
     DUPLICATE_NICKNAME(HttpStatus.BAD_REQUEST, "이미 사용중인 닉네임입니다."),
     FIND_FAILED(HttpStatus.BAD_REQUEST, "해당 유저는 존재하지 않습니다."),
-    
-    ;
+
+    INCORRECT_PASSWORD(HttpStatus.UNAUTHORIZED, "사용자명 또는 비밀번호가 일치하지 않습니다.");
 
     private HttpStatus httpStatus;
     private String message;

@@ -2,6 +2,7 @@ package com.todo.todoapp.application.user;
 
 import com.todo.todoapp.domain.user.model.User;
 import com.todo.todoapp.domain.user.repository.UserRepository;
+import com.todo.todoapp.global.exception.todo.IncorrectPasswordException;
 import com.todo.todoapp.global.exception.user.DuplicateNicknameException;
 import com.todo.todoapp.global.exception.user.NoSuchUserException;
 import com.todo.todoapp.global.exception.user.code.UserErrorCode;
@@ -29,6 +30,10 @@ public class UserService {
     @Transactional
     public AuthenticatedUserResponse verifyUser(LoginRequest loginRequest) {
         User user = getUserByUserName(loginRequest.userName());
+
+        if (!user.getPassword().equals(loginRequest.password())) {
+            throw new IncorrectPasswordException(UserErrorCode.INCORRECT_PASSWORD);
+        }
 
         return AuthenticatedUserResponse.builder()
                 .userName(user.getUserName())
