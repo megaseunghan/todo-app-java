@@ -1,17 +1,20 @@
-package com.todo.todoapp.global.exception.user.code;
+package com.todo.todoapp.global.exception.auth.code;
 
 import com.todo.todoapp.global.exception.common.code.ErrorCode;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import org.springframework.http.HttpStatus;
 
+@Getter
 @AllArgsConstructor
-public enum UserErrorCode implements ErrorCode {
+public enum AuthErrorCode implements ErrorCode {
 
-    DUPLICATE_NICKNAME(HttpStatus.BAD_REQUEST, "이미 사용중인 닉네임입니다."),
-    FIND_FAILED(HttpStatus.BAD_REQUEST, "해당 유저는 존재하지 않습니다."),
+    TOKEN_HAS_EXPIRED(HttpStatus.UNAUTHORIZED, "토큰이 만료되었습니다."),
+    INVALID_TOKEN(HttpStatus.BAD_REQUEST, "토큰이 유효하지 않습니다."),
+    JWT_INVALID_FAILED(HttpStatus.UNAUTHORIZED, "JWT 오류가 발생하였습니다."),
+    AUTHORIZE_FAILED(HttpStatus.UNAUTHORIZED, "인증에 실패하였습니다."),
 
-    INCORRECT_PASSWORD(HttpStatus.UNAUTHORIZED, "사용자명 또는 비밀번호가 일치하지 않습니다.");
-
+    ;
     private HttpStatus httpStatus;
     private String message;
 
