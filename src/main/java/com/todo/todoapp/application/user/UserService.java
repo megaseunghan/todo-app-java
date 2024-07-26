@@ -38,6 +38,7 @@ public class UserService {
         return AuthenticatedUserResponse.builder()
                 .userName(user.getUserName())
                 .role(user.getUserRole())
+                .password(user.getPassword())
                 .build();
     }
 

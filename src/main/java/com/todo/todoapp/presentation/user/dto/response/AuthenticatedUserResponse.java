@@ -6,6 +6,7 @@ import lombok.Builder;
 @Builder
 public record AuthenticatedUserResponse(
         String userName,
-        Role role
+        Role role,
+        String password
 ) {
 }

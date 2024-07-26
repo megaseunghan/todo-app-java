@@ -62,10 +62,12 @@ public class JwtUtil {
         Claims claims = getClaims(accessToken);
         String userName = (String) claims.get("userName");
         Role role = Role.valueOf((String) claims.get("role"));
+        String password = (String) claims.get("password");
 
         return AuthenticatedUserResponse.builder()
                 .userName(userName)
                 .role(role)
+                .password(password)
                 .build();
     }
 
