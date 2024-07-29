@@ -3,7 +3,7 @@ package com.todo.todoapp.infrastructure.jwt;
 import com.todo.todoapp.domain.user.vo.Role;
 import com.todo.todoapp.infrastructure.jwt.config.JwtProperties;
 import com.todo.todoapp.infrastructure.jwt.vo.response.Jwt;
-import com.todo.todoapp.presentation.user.dto.response.AuthenticatedUserResponse;
+import com.todo.todoapp.presentation.user.dto.response.AuthenticateUser;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
@@ -58,13 +58,13 @@ public class JwtUtil {
         return new Date(System.currentTimeMillis() + expireTimeMils);
     }
 
-    public AuthenticatedUserResponse getAuthenticateUser(String accessToken) {
+    public AuthenticateUser getAuthenticateUser(String accessToken) {
         Claims claims = getClaims(accessToken);
         String userName = (String) claims.get("userName");
         Role role = Role.valueOf((String) claims.get("role"));
         String password = (String) claims.get("password");
 
-        return AuthenticatedUserResponse.builder()
+        return AuthenticateUser.builder()
                 .userName(userName)
                 .role(role)
                 .password(password)

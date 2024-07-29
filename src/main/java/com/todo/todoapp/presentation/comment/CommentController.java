@@ -21,7 +21,8 @@ public class CommentController {
     @PostMapping("/{todoId}")
     public ResponseEntity<CommentResponse> save(
             @PathVariable long todoId,
-            @Valid @RequestBody CreateCommentRequest request) {
+            @Valid @RequestBody CreateCommentRequest request
+    ) {
         CommentResponse response = commentService.save(todoId, request);
         long id = response.id();
         URI uri = URI.create(String.format("/comments/%d/%d", todoId, id));

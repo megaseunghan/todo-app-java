@@ -4,7 +4,7 @@ import com.todo.todoapp.domain.user.vo.Role;
 import lombok.Builder;
 
 @Builder
-public record AuthenticatedUserResponse(
+public record AuthenticateUser(
         String userName,
         Role role,
         String password

@@ -1,10 +1,8 @@
 package com.todo.todoapp.global.auth.filter;
 
 import com.fasterxml.jackson.core.JsonParseException;
-import com.todo.todoapp.domain.user.vo.Role;
 import com.todo.todoapp.infrastructure.jwt.JwtUtil;
-import com.todo.todoapp.presentation.user.dto.response.AuthenticatedUserResponse;
-import io.jsonwebtoken.Claims;
+import com.todo.todoapp.presentation.user.dto.response.AuthenticateUser;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.UnsupportedJwtException;
@@ -46,7 +44,7 @@ public class JwtAuthorizationFilter implements Filter {
 
         try {
             String accessToken = httpServletRequest.getHeader("Authorization").substring(7);
-            AuthenticatedUserResponse verifyUser = jwtUtil.getAuthenticateUser(accessToken);
+            AuthenticateUser authenticateUser = jwtUtil.getAuthenticateUser(accessToken);
             chain.doFilter(request, response);
         } catch (JsonParseException e) {
             log.error("JSON 파싱 실패");
