@@ -36,7 +36,7 @@ public class JwtLoginFilter implements Filter {
             Jwt jwt = jwtUtil.createJwt(claims);
             userService.updateAccessToken(((AuthenticatedUserResponse) attribute).userName(), jwt.accessToken());
             httpServletResponse.setHeader("Authorization", "Bearer " + jwt.accessToken());
-            return;
+            chain.doFilter(request, response);
         }
 
         httpServletResponse.sendError(HttpStatus.BAD_REQUEST.value());
