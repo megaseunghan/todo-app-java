@@ -1,5 +1,6 @@
 package com.todo.todoapp.domain.todo.model;
 
+import com.todo.todoapp.domain.user.model.User;
 import com.todo.todoapp.global.entity.BaseEntity;
 import com.todo.todoapp.presentation.todo.dto.request.UpdateTodoRequest;
 import jakarta.persistence.*;
@@ -20,14 +21,15 @@ public class Todo extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
     private String title;
     private String description;
-    private String manager;
-    private String password;
 
     public void update(UpdateTodoRequest request) {
         this.title = request.title();
         this.description = request.description();
-        this.manager = request.manager();
     }
 }

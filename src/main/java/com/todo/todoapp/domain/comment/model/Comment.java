@@ -1,6 +1,7 @@
 package com.todo.todoapp.domain.comment.model;
 
 import com.todo.todoapp.domain.todo.model.Todo;
+import com.todo.todoapp.domain.user.model.User;
 import com.todo.todoapp.global.entity.BaseEntity;
 import com.todo.todoapp.presentation.comment.dto.request.UpdateCommentRequest;
 import jakarta.persistence.*;
@@ -22,9 +23,11 @@ public class Comment extends BaseEntity {
     @JoinColumn(name = "todo_id")
     private Todo todo;
 
-    private String comment;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
-    private String writerId;
+    private String comment;
 
     public void update(UpdateCommentRequest request) {
         this.comment = request.comment();
