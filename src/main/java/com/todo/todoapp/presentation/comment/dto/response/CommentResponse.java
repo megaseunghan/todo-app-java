@@ -9,14 +9,14 @@ import java.time.LocalDateTime;
 public record CommentResponse(
         long id,
         String comment,
-        String writerId,
+        String userName,
         LocalDateTime createdAt
 ) {
-    public static CommentResponse from(Comment comment) {
+    public static CommentResponse from(Comment comment, String userName) {
         return CommentResponse.builder()
                 .id(comment.getId())
                 .comment(comment.getComment())
-                .writerId(comment.getWriterId())
+                .userName(userName)
                 .createdAt(comment.getCreatedAt())
                 .build();
 

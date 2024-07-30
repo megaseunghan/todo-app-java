@@ -11,14 +11,14 @@ public record TodoResponse(
         String title,
         String description,
         LocalDateTime createdAt,
-        String manager
+        String userName
 ) {
     public static TodoResponse from(Todo todo) {
         return TodoResponse.builder()
                 .id(todo.getId())
                 .title(todo.getTitle())
                 .description(todo.getDescription())
-                .manager(todo.getManager())
+                .userName(todo.getUser().getUserName())
                 .createdAt(todo.getCreatedAt())
                 .build();
     }

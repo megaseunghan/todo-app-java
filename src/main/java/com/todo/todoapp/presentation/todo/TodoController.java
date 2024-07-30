@@ -1,10 +1,11 @@
 package com.todo.todoapp.presentation.todo;
 
 import com.todo.todoapp.application.todo.TodoService;
+import com.todo.todoapp.global.auth.annotation.Authenticate;
 import com.todo.todoapp.presentation.todo.dto.request.CreateTodoRequest;
-import com.todo.todoapp.presentation.todo.dto.request.DeleteTodoRequest;
 import com.todo.todoapp.presentation.todo.dto.request.UpdateTodoRequest;
 import com.todo.todoapp.presentation.todo.dto.response.TodoResponse;
+import com.todo.todoapp.presentation.user.dto.response.AuthenticateUser;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -21,8 +22,10 @@ public class TodoController {
     private final TodoService todoService;
 
     @PostMapping
-    public ResponseEntity<TodoResponse> save(@Valid @RequestBody CreateTodoRequest request) {
-        TodoResponse response = todoService.save(request);
+    public ResponseEntity<TodoResponse> save(
+            @Valid @RequestBody CreateTodoRequest request,
+            @Authenticate AuthenticateUser authenticateUser) {
+        TodoResponse response = todoService.save(request, authenticateUser);
         long id = response.id();
         URI uri = URI.create(String.format("/todos/%d", id));
         return ResponseEntity.created(uri).body(response);
@@ -43,16 +46,17 @@ public class TodoController {
     @PutMapping("/{id}")
     public ResponseEntity<TodoResponse> update(
             @PathVariable long id,
-            @Valid @RequestBody UpdateTodoRequest request) {
-        TodoResponse response = todoService.update(id, request);
+            @Valid @RequestBody UpdateTodoRequest request,
+            @Authenticate AuthenticateUser authenticateUser) {
+        TodoResponse response = todoService.update(id, request, authenticateUser);
         return ResponseEntity.ok(response);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(
             @PathVariable long id,
-            @Valid @RequestBody DeleteTodoRequest request) {
-        todoService.delete(id, request);
+            @Authenticate AuthenticateUser authenticateUser) {
+        todoService.delete(id, authenticateUser);
         return ResponseEntity.noContent().build();
     }
 

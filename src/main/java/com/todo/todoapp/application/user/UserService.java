@@ -8,7 +8,7 @@ import com.todo.todoapp.global.exception.user.NoSuchUserException;
 import com.todo.todoapp.global.exception.user.code.UserErrorCode;
 import com.todo.todoapp.presentation.user.dto.request.LoginRequest;
 import com.todo.todoapp.presentation.user.dto.request.SignUpRequest;
-import com.todo.todoapp.presentation.user.dto.response.AuthenticatedUserResponse;
+import com.todo.todoapp.presentation.user.dto.response.AuthenticateUser;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -28,16 +28,17 @@ public class UserService {
     }
 
     @Transactional
-    public AuthenticatedUserResponse verifyUser(LoginRequest loginRequest) {
+    public AuthenticateUser verifyUser(LoginRequest loginRequest) {
         User user = getUserByUserName(loginRequest.userName());
 
         if (!user.getPassword().equals(loginRequest.password())) {
             throw new IncorrectPasswordException(UserErrorCode.INCORRECT_PASSWORD);
         }
 
-        return AuthenticatedUserResponse.builder()
+        return AuthenticateUser.builder()
                 .userName(user.getUserName())
                 .role(user.getUserRole())
+                .password(user.getPassword())
                 .build();
     }
 
